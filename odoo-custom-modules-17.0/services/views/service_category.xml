@@ -1,0 +1,79 @@
+<odoo>
+    <data>
+        <!-- custom tree/list view definition -->
+        <record model="ir.actions.act_window" id="service_category_action_window">
+            <field name="name">Service Category</field>
+            <field name="res_model">service.category</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new service category!
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="service_category_tree">
+            <field name="name">service.category.view.tree</field>
+            <field name="model">service.category</field>
+            <field name="arch" type="xml">
+                <tree string="Service Categories" edit="false" delete="false">
+                    <field name="name" readonly="1"/>
+                    <field name="description" readonly="1" optional="hide"/>
+                    <field name="state" readonly="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- custom form view definition -->
+        <record model="ir.ui.view" id="service_category_form">
+            <field name="name">service.category.view.form</field>
+            <field name="model">service.category</field>
+            <field name="arch" type="xml">
+                <form string="Service Category" create="false" delete="false">
+                    <header>
+                        <button id="button_publish_service_category" name="publish_service_category" string="Publish" class="btn-primary oe_highlight" type="object" attrs="{'invisible':['|', ('id' ,'=', False), ('state', '=', 'publish')]}"/>
+                        <button id="button_unpublish_service_category" name="unpublish_service_category" string="Unpublish" class="btn-danger oe_highlight" type="object" attrs="{'invisible':['|', ('id' ,'=', False), ('state', '!=', 'publish')]}"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,publish" options="{'fold_field': 'fold'}"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_services" class="oe_stat_button" icon="fa-list-ul" type="object" help="List of Services">
+                                <div class="o_stat_info">
+                                    <field name="service_count" class="oe_stat_value"/>
+                                    <span class="o_stat_text">Services</span>
+                                </div>
+                            </button>                      
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" attrs="{'readonly': [('state', '=','publish')], 'required': True}"/>
+                            </h1>
+                        </div>
+                        <group name="service_category_data">
+                            <field name="description" attrs="{'readonly': [('state', '=','publish')], 'required': True}"/>
+                        </group>
+                        <notebook>
+                            <page string="Services" name="available_services_page">
+                                <field name="service_ids" mode="tree" attrs="{'readonly': [('state', '=','publish')]}">
+                                    <tree string="Services" delete="false" decoration-info="state == 'draft'" 
+                                    decoration-success="state == 'publish'" decoration-danger="state == 'unpublish'" 
+                                    decoration-bf="1" decoration-it="1">
+                                        <field name="name"/>
+                                        <field name="description"/>
+                                        <field name="state"/>
+                                    </tree>
+                                </field>                                
+                            </page>                                                                                                                                                                 
+                        </notebook>                                                
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>                    
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

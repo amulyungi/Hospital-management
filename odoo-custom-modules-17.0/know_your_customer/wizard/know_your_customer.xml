@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="know_your_customer_wizard">
+            <field name="name">Know Your Customer</field>
+            <field name="type">form</field>
+            <field name="model">know.your.customer.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <separator orientation="horizontal"/>
+                        <group name="know_your_customer_data">
+                            <group name="know_your_customer_column_1">
+                                <field name="search_mode" required="1" widget="radio" options="{'horizontal': true}" 
+                                help="The type of search you would like to perform"/>
+
+                                <field name="search_param" string="Search Using ID No./Passport No." 
+                                placeholder="ID or Passport number" invisible="search_mode == 'advanced_search'" required="search_mode == 'basic_search'" />  
+                                                                 
+                                <field name="search_param" string="Search Using Full Names/ID No./Passport No." 
+                                placeholder="Full Names, ID or Passport number" invisible="search_mode == 'basic_search'" required="search_mode == 'advanced_search'"/>
+                                
+                                <field name="id_type" invisible="search_mode == 'advanced_search'" required="search_mode == 'basic_search'"
+                                help="The type of ID you would like to perform a search on"/>
+                                
+                                <field name="country_id" invisible="search_mode == 'advanced_search'" required="search_mode == 'basic_search'"
+                                options="{'no_create': True, 'no_create_edit':True}"
+                                help="The country that issued the ID/Passport"/>
+
+                                <field name="partner_id" readonly="1" required="1"/>
+                            </group>
+                            <group name="know_your_customer_column_2">
+                                <p>
+                                    <b>1.) <i style="color:red;">Basic search</i></b> mode supports: 
+                                    <ul>
+                                        <li>ID number</li>
+                                        <li>Passport number</li>
+                                    </ul>                                
+                                    <b>2.) <i style="color:red;">Advanced search</i></b> mode supports:
+                                    <ul>
+                                        <li>Full names</li>
+                                        <li>ID number</li>
+                                        <li>Passport number</li>
+                                    </ul>
+                                </p>                            
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="KYC Details" name="kyc_details_page">
+                                <field name="kyc_ids" mode="tree">
+                                    <tree string="KYC Details" create="false" edit="false" delete="false" decoration-success="len(partner_ids) == 0" 
+                                    decoration-danger="len(partner_ids) > 0" decoration-bf="len(partner_ids) > 0" decoration-it="len(partner_ids) > 0">
+                                        <field name="full_name" />
+                                        <field name="gender" />
+                                        <field name="citizenship" />
+                                        <field name="date_of_birth" />
+                                        <field name="id_number" />
+                                        <field name="id_type" />
+                                        <field name="id_expiration_date" />
+                                        <field name="partner_ids"/>
+                                    </tree>
+                                </field>
+                            </page>                                                 
+                        </notebook>
+                        <footer>
+                            <button id="button_search_kyc_data" name="search_kyc_data" string="Search KYC Details" 
+                            class="btn-warning oe_highlight" style="margin-right:15px;" type="object"/>
+                            <button id="button_match_kyc_data" name="match_kyc_data" string="Match KYC Details" 
+                            type="object" class="oe_highlight" style="margin-right:15px;" 
+                            confirm="Would you like to match this partner with the selected KYC details?"/>
+                            <button string="Cancel" class="btn-secondary" special="cancel"/>                            
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

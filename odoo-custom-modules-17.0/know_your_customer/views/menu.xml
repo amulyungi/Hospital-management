@@ -1,0 +1,7 @@
+<odoo>
+    <menuitem name="KYC" id="know_your_customer_root" sequence="91" web_icon="know_your_customer,static/description/icon.png"/>
+    <menuitem name="Customers" id="know_your_customer_menu_1" action="know_your_customer_action_window" parent="know_your_customer_root" sequence="1"/>
+    <menuitem name="Settings"  id="know_your_customer_menu_2" action="smile_identity_settings_action_window" parent="know_your_customer_root" sequence="2"/>
+</odoo>
+
+    

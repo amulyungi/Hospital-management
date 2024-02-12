@@ -1,0 +1,95 @@
+<odoo>
+    <data>
+        <!-- custom tree/list view definition -->
+        <record model="ir.actions.act_window" id="know_your_customer_action_window">
+            <field name="name">Know Your Customer</field>
+            <field name="res_model">know.your.customer</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new customer!
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="know_your_customer_tree">
+            <field name="name">know.your.customer.view.tree</field>
+            <field name="model">know.your.customer</field>
+            <field name="arch" type="xml">
+                <tree string="Know Your Customers" create="false" edit="false" delete="false">
+                    <field name="full_name"/>
+                    <field name="gender"/>
+                    <field name="citizenship"/>
+                    <field name="date_of_birth"/>
+                    <field name="id_number"/>
+                    <field name="id_type"/>
+                    <field name="id_expiration_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- custom form view definition -->
+        <record model="ir.ui.view" id="know_your_customer_form">
+            <field name="name">know.your.customer.view.form</field>
+            <field name="model">know.your.customer</field>
+            <field name="arch" type="xml">
+                <form string="Know Your Customers" create="false" edit="false" delete="false">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group name="know_your_customer_data">
+                            <group name="know_your_customer_data_column_1" string="Customer Details">
+                                <field name="full_name" readonly="1"/>
+                                <field name="first_name" readonly="1"/>
+                                <field name="other_name" readonly="1"/>
+                                <field name="surname" readonly="1"/>
+                                <field name="gender" readonly="1"/>
+                                <field name="country_id" readonly="1"/>
+                                <field name="citizenship" readonly="1"/>
+                                <field name="place_of_birth" readonly="1"/>
+                                <field name="date_of_birth" readonly="1"/>
+                                <field name="date_of_death" readonly="1"/>
+                                <field name="id_number" readonly="1"/>
+                                <field name="id_type" readonly="1"/>
+                                <field name="id_issuance_date" readonly="1"/>
+                                <field name="id_expiration_date" readonly="1"/>
+                                <field name="pin" readonly="1"/>
+                                <field name="phone_number_1" readonly="1"/>
+                                <field name="phone_number_2" readonly="1"/>
+                                <field name="secondary_id_number" readonly="1"/>
+                            </group>
+
+                            <group name="know_your_customer_data_column_2" string="Metadata">
+                                <field name="smile_id_job" readonly="1"/>
+                                <field name="job_id" readonly="1"/>
+                                <field name="job_type" readonly="1"/>
+                                <field name="result_type" readonly="1"/>
+                                <field name="result_text" readonly="1"/>
+                                <field name="result_code" readonly="1"/>
+                                <field name="is_final_result" readonly="1"/>
+                                <field name="verify_id_number" readonly="1"/>
+                                <field name="return_personal_info" readonly="1"/>
+                                <field name="error_occurred" readonly="1"/>
+                                <field name="error_code" readonly="1"/>
+                                <field name="error_message" readonly="1"/>
+                                <field name="source" readonly="1"/>
+                                <field name="signature" readonly="1"/>
+                                <field name="timestamp" readonly="1"/>
+                                <field name="user_id" readonly="1" decoration-danger="1" decoration-it="1" decoration-bf="1"/>
+                            </group>                            
+                        </group>
+                        <notebook>
+                            <page string="Partners" name="partner_details_page">
+                                <field name="partner_ids"/>
+                            </page>                                                 
+                        </notebook>                                                
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

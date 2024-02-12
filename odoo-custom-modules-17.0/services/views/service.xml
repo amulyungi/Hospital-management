@@ -1,0 +1,59 @@
+<odoo>
+    <data>
+        <!-- custom tree/list view definition -->
+        <record model="ir.actions.act_window" id="services_action_window">
+            <field name="name">Service</field>
+            <field name="res_model">services</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new service!
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="services_tree">
+            <field name="name">services.view.tree</field>
+            <field name="model">services</field>
+            <field name="arch" type="xml">
+                <tree string="Services" edit="false" delete="false">
+                    <field name="name" readonly="1"/>
+                    <field name="description" readonly="1" optional="hide"/>
+                    <field name="state" readonly="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- custom form view definition -->
+        <record model="ir.ui.view" id="services_form">
+            <field name="name">services.view.form</field>
+            <field name="model">services</field>
+            <field name="arch" type="xml">
+                <form string="Service" create="false" delete="false">
+                    <header>
+                        <button id="button_publish_service" name="publish_service" string="Publish" class="btn-primary oe_highlight" type="object" attrs="{'invisible':['|', ('id' ,'=', False), ('state', '=', 'publish')]}"/>
+                        <button id="button_unpublish_service" name="unpublish_service" string="Unpublish" class="btn-danger oe_highlight" type="object" attrs="{'invisible':['|', ('id' ,'=', False), ('state', '!=', 'publish')]}"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,publish" options="{'fold_field': 'fold'}"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" attrs="{'readonly': [('state', '=','publish')], 'required': True}"/>
+                            </h1>
+                        </div>
+                        <group name="services_data">
+                            <field name="service_category_id" options="{'no_open': True, 'no_create': True, 'no_create_edit':True}" attrs="{'readonly': [('state', '=','publish')], 'required': True}"/>
+                            <field name="description" attrs="{'readonly': [('state', '=','publish')], 'required': True}"/>
+                        </group>                                           
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>                    
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,39 @@
+<odoo>
+    <data noupdate="0">
+        <record model="ir.module.category" id="services.module_services">
+            <field name="name">Services</field>
+            <field name="description">Services</field>
+            <field name="sequence">34</field>
+        </record>
+
+        <record id="service_read" model="res.groups" forcecreate="1">
+            <field name="name">Read-Only User</field>
+            <field name="category_id" ref="services.module_services" />
+            <field name="comment">The user has read-only permissions on `Service` modules</field>
+        </record>
+
+        <record id="service_write" model="res.groups" forcecreate="1">
+            <field name="name">Read-Write User</field>
+            <field name="category_id" ref="services.module_services" />
+            <field name="comment">The user has read and write permissions on `Service` modules</field>
+            <field name="implied_ids" eval="[(4, ref('services.service_read'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        </record>
+
+        <record id="service_create" model="res.groups" forcecreate="1">
+            <field name="name">Read-Create User</field>
+            <field name="category_id" ref="services.module_services" />
+            <field name="comment">The user has read and create permissions on `Service` modules</field>
+            <field name="implied_ids" eval="[(4, ref('services.service_read'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        </record>                 
+
+        <record id="service_admin" model="res.groups" forcecreate="1">
+            <field name="name">Admin User</field>
+            <field name="category_id" ref="services.module_services" />
+            <field name="comment">The user has read, write,create and delete permissions on `Service` modules</field>
+            <field name="implied_ids" eval="[(4, ref('services.service_write'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        </record>
+    </data>
+</odoo>

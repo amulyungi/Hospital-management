@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="res_partner_kyc_inherited_view_form">
+            <field name="name">res.partner.kyc.inherited.view.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="before">
+                    <header>
+                        <button name="action_verify_kyc_details" string="Verify KYC Details" 
+                        type="object" class="btn-warning oe_highlight" invisible="is_company == True"/>
+                    </header>
+                </xpath>
+                <xpath expr="//field[@name='category_id']" position="before">
+                    <field name="kyc_id" readonly="1" invisible="is_company == True"/>
+                </xpath>               
+            </field>
+        </record>
+    </data>
+</odoo>

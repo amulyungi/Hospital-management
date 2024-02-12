@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem name="Services" id="service_menu_root" web_icon="services,static/description/icon.png"/>
+
+    <!-- menu groups -->
+    <menuitem name="Services" id="service_menu" parent="service_menu_root" sequence="1"/>
+    <menuitem name="Service Categories" id="service_category_menu" parent="service_menu" groups="services.service_read" action="service_category_action_window" sequence="1"/>    
+    <menuitem name="Services" id="service_menu_1" parent="service_menu" groups="services.service_read" action="services_action_window" sequence="2"/>
+</odoo>
+    

@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_service_category_read,access_service_category_read,model_service_category,services.service_read,1,0,0,0
+access_service_category_write,access_service_category_write,model_service_category,services.service_write,0,1,0,0
+access_service_category_create,access_service_category_create,model_service_category,services.service_create,0,0,1,0
+access_service_category_admin,access_service_category_admin,model_service_category,services.service_admin,1,1,1,1
+
+access_services_read,access_services_read,model_services,services.service_read,1,0,0,0
+access_services_write,access_services_write,model_services,services.service_write,0,1,0,0
+access_services_create,access_services_create,model_services,services.service_create,0,0,1,0
+access_services_admin,access_services_admin,model_services,services.service_admin,1,1,1,1

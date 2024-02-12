@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">smileidentity.res.config.settings.view.form.inherit</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="6" />
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <div class="app_settings_block"  data-key="smile_identity" string="Smile Identity">
+                    <h2>Smile Identity Settings</h2>
+                    <div class="row mt16 o_settings_container" name="smileidentity_setting_container">
+                        <div class="col-12 col-lg-6 o_setting_box" id="smile_identity" >
+                            <div class="o_setting_right_pane">
+                                <label for="smile_identity_base_url"/>
+                                <field name="smile_identity_base_url" />
+                                <label for="smile_identity_partner_id"/>
+                                <field name="smile_identity_partner_id"/>
+                                <label for="smile_identity_api_key"/>
+                                <field name="smile_identity_api_key" />
+                                <label for="smile_identity_header"/>
+                                <field name="smile_identity_header" />
+                                <label for="smile_identity_timezone"/>
+                                <field name="smile_identity_timezone" />                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="smile_identity_settings_action_window" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_id" ref="res_config_settings_view_form" />
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'smile_identity', 'bin_size': False}</field>
+    </record>
+</odoo>
